@@ -111,7 +111,8 @@ function Paired(core) {
             case 'zones_changed':
             case 'zones_added':
                 const zones_to_check = Settings.roonZones.split(',');
-                const available_zones = data.zones || data.zones_changed || data.zones_added;;
+                const available_zones = data.zones || data.zones_changed || data.zones_added;
+                console.log(available_zones)
                 const zones = available_zones.filter((zone_data) => zones_to_check.includes(zone_data.display_name));
                 const priority_zone = zones.sort((a, b) => zones_to_check.indexOf(a.display_name) - zones_to_check.indexOf(b.display_name));
 
