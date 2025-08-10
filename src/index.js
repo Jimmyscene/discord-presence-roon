@@ -99,22 +99,19 @@ function Paired(core) {
         settings: {},
         now_playing: {},
     };
-
     transport.subscribe_zones((cmd, data) => {
         if(!['Changed', 'Subscribed'].includes(cmd)) return;
         switch(Object.keys(data)[0]) {
             case 'zones_removed':
                 Discord.Self().user?.clearActivity();
                 return;
-            
             case 'zones':
             case 'zones_changed':
             case 'zones_added':
                 const zones_to_check = Settings.roonZones.split(',');
-                const available_zones = data.zones || data.zones_changed || data.zones_added;;
+                const available_zones = data.zones || data.zones_changed || data.zones_added;
                 const zones = available_zones.filter((zone_data) => zones_to_check.includes(zone_data.display_name));
                 const priority_zone = zones.sort((a, b) => zones_to_check.indexOf(a.display_name) - zones_to_check.indexOf(b.display_name));
-
                 if(priority_zone.length < 1) return;
                 zone_info = { ...zone_info, ...priority_zone[0] };
                 break;
@@ -287,7 +284,7 @@ function GetImage(api) {
         return new Promise((resolve, reject) => {
             api.get_image(image_key, (error, content_type, image) => {
                 if(error) reject(error);
-    
+
                 resolve(Buffer.from(image));
             });
         });
