@@ -25,6 +25,7 @@ var roon = new RoonApi({
 
     core_paired: Paired,
     core_unpaired: Unpaired,
+    log_level: "none"
 });
 
 /** @type {import('./settings').TSettings} */
