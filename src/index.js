@@ -109,10 +109,19 @@ function Paired(core) {
             case 'zones':
             case 'zones_changed':
             case 'zones_added':
-                const zones_to_check = Settings.roonZones.split(',');
                 const available_zones = data.zones || data.zones_changed || data.zones_added;
-                const zones = available_zones.filter((zone_data) => zones_to_check.includes(zone_data.display_name));
-                const priority_zone = zones.sort((a, b) => zones_to_check.indexOf(a.display_name) - zones_to_check.indexOf(b.display_name));
+                let priority_zone;
+                
+                if (Settings.roonZones.trim().toLowerCase() === 'all') {
+                    // Use first available zone when "All" is specified
+                    priority_zone = available_zones;
+                } else {
+                    // Filter zones based on configured list
+                    const zones_to_check = Settings.roonZones.split(',');
+                    const zones = available_zones.filter((zone_data) => zones_to_check.includes(zone_data.display_name));
+                    priority_zone = zones.sort((a, b) => zones_to_check.indexOf(a.display_name) - zones_to_check.indexOf(b.display_name));
+                }
+                
                 if(priority_zone.length < 1) return;
                 zone_info = { ...zone_info, ...priority_zone[0] };
                 break;

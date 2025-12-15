@@ -17,7 +17,7 @@ const RoonApiSettings = require('node-roon-api-settings');
 /** @type {TSettings} */
 const DefaultSettings = {
     discordClientId: '1149335969523318975',
-    roonZones: 'Desktop,Living Room',
+    roonZones: 'All',
 
     discogsEnable: false,
     discogsUserToken: '',
@@ -83,7 +83,8 @@ function Layout() {
         items: [
             {
                 type: 'string',
-                title: 'Zones to Monitor (Separated by commas, order in priority)',
+                title: 'Zones to Monitor',
+                subtitle: 'Enter zone names separated by commas in priority order, or "All" to monitor any active zone',
                 setting: 'roonZones',
             }
         ],
