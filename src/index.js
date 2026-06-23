@@ -233,14 +233,15 @@ async function SongChanged(core, data) {
     const endTimestamp = startTimestamp + length * 1000;
 
     const activity = {
+        name: `${artist}`,
         type: ActivityType.Listening,
         details: formatSongLine(track), // Track title
         state: formatSongLine(artist), // Track artist
         startTimestamp,
         endTimestamp,
         instance: false,
-        smallImageKey: DEFAULT_IMAGE,
-        smallImageText: `Listening at: ${data.display_name}`,
+        // smallImageKey: DEFAULT_IMAGE,
+        // smallImageText: `Listening at: ${data.display_name}`,
         largeImageKey: PreviousAlbumArt.imageUrl,
         largeImageText: (album)? formatSongLine(album) : `Listening at: ${data.display_name}`,
     };
